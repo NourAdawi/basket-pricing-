@@ -1,0 +1,53 @@
+# Basket Pricer
+
+A pricing library for a supermarket shopping basket. Given a basket, a catalogue and a set of offers, it works out the sub-total, discount and total.
+
+## How to run
+
+To be filled 
+
+## Design
+
+the intended shape of the solution.
+
+### Interface
+
+The core of the library is a single pure function:
+
+```ts
+priceBasket(basket, catalogue, offers): PricingResult
+// PricingResult = { subTotal: number; discount: number; total: number }
+```
+
+
+### Offers
+
+Offers implement a small interface:
+
+```ts
+interface Offer {
+  readonly description: string;
+  computeDiscount(basket, catalogue): Pence;
+}
+```
+
+Each offer receives the whole basket and catalogue and returns the discount it contributes, in pence. Offers that do not apply return 0. This design means new offer types (for example "spend over X, get Y off") can be added by other teams without changing the pricer itself.
+
+Planned implementations:
+
+- `PercentageOff(product, percent)`
+- `MultiBuy(product, buyQty, payQty)` covers "buy 2 get 1 free" as buy 3 pay 2, and scales to 6 for 4, 9 for 6 automatically
+- `CheapestFreeInSet(products, groupSize)` covers "buy three, cheapest free" across a set of products, maximising the discount for the customer
+
+
+### Money
+
+All internal arithmetic is done in integer pence to avoid floating point drift. Conversion to pounds happens only at the public boundary. Rounding is half-up, applied where an offer produces fractional pence.
+
+### Assumptions and edge-case - will revisist 
+
+- A basket item missing from the catalogue throws an `UnknownProductError`. 
+- An offer referencing a product missing from the catalogue contributes zero discount, silently. The description says catalogue and offers are owned by different teams and can drift apart, so this is expected, not an error.
+- Multiple offers on the same product all apply independently. Total can never be negative.
+- Invalid offer configuration (for example a negative percentage) throws at construction time. Misconfiguration is a programmer error and should fail early, unlike "offer does not apply", which is a normal runtime situation.
+- An empty basket prices to zero.
