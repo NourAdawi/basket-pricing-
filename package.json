@@ -1,0 +1,29 @@
+{
+  "name": "basket-pricer",
+  "version": "1.0.0",
+  "description": "A pricing library for a supermarket shopping basket.",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "demo": "tsx examples/demo.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NourAdawi/basket-pricing-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/NourAdawi/basket-pricing-/issues"
+  },
+  "homepage": "https://github.com/NourAdawi/basket-pricing-#readme",
+  "devDependencies": {
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}
