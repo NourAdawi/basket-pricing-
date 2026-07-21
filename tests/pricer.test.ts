@@ -1,18 +1,18 @@
 import { describe, expect, it } from "vitest";
-import { poundsToPence } from "../src/money.js";
+import { catalogueFromPounds } from "../src/catalogue.js";
 import { priceBasket } from "../src/pricer.js";
-import { Basket, Catalogue, UnknownProductError } from "../src/types.js";
+import { Basket, UnknownProductError } from "../src/types.js";
 
-// Catalogue prices are written in pounds here because that is how a price list reads;
-// poundsToPence converts them to the pence the pricer works in.
-const catalogue: Catalogue = new Map([
-    ["beans", poundsToPence(0.65)],
-    ["bread", poundsToPence(0.80)],
-    ["milk", poundsToPence(1.30)],
-    ["apples", poundsToPence(1.00)],
-    ["dime", poundsToPence(0.10)],
-    ["double-dime", poundsToPence(0.20)]
-]);
+// Prices are written in pounds because that is how a price list reads;
+// the factory converts them to the pence the pricer works in.
+const catalogue = catalogueFromPounds({
+    beans: 0.65,
+    bread: 0.80,
+    milk: 1.30,
+    apples: 1.00,
+    dime: 0.10,
+    "double-dime": 0.20
+});
 
 const basketOf = (items: Record<string, number>): Basket => new Map(Object.entries(items));
 

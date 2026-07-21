@@ -8,3 +8,9 @@
  4- treats a zero quantity as contributing nothing
  5- throws UnknownProductError for a basket item not in the catalogue
  6- does not fall victim to float drift: 0.10 + 0.20  !== 0.30 in float arithmetic
+
+
+3- create a new factory in src/catalogue.ts, catalogueFromPounds, build a  Catalogue from prices in pounds, prices are converted to integer pence once here, so malformed prices fail at construction rather than mid ttransaction. consumers of this
+library work in pounds; pence is an internal representation.
+after that update the setup block in test to use catalogueFromPounds. and create a simple test in catalogue.test.ts that tests malformed prices, it should failed at construction. catalogueFromPounds({ "milk": NaN })).toThrow();
+export new factory from src/index.ts
