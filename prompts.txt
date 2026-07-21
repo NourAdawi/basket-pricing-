@@ -1,2 +1,10 @@
 
+1- create penceToPounds and poundsToPence methods in @src/money.ts that converts pence prices to pounds and vice versa
 
+2- Create a test suite inside @tests/pricer.test.ts  for the priceBasket function, it calculates the subtotal for now, no offers logic yet. test cases are:
+ 1- prices an empty basket as zero across the board
+ 2- prices a single item
+ 3- multiplies by quantity
+ 4- treats a zero quantity as contributing nothing
+ 5- throws UnknownProductError for a basket item not in the catalogue
+ 6- does not fall victim to float drift: 0.10 + 0.20  !== 0.30 in float arithmetic
