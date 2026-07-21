@@ -14,3 +14,5 @@
 library work in pounds; pence is an internal representation.
 after that update the setup block in test to use catalogueFromPounds. and create a simple test in catalogue.test.ts that tests malformed prices, it should failed at construction. catalogueFromPounds({ "milk": NaN })).toThrow();
 export new factory from src/index.ts
+
+4- create a test suite for money.ts utils that test the conversion + malformed and rejected values + round tripping 

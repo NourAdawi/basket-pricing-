@@ -9,7 +9,6 @@ export const catalogueFromPounds = (prices: Readonly<Record<ProductName, number>
         try {
             return [productName, poundsToPence(pounds)] as const;
         } catch (cause) {
-            // Name the offending product: the price list alone says which value is bad, not which key.
             throw new RangeError(`Invalid price for "${productName}": ${(cause as Error).message}`, { cause });
         }
     }));
