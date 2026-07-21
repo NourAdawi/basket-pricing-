@@ -19,11 +19,14 @@ export const priceBasket = (basket: Basket, catalogue: Catalogue): PricingResult
 }
 
 const calculateSubTotal = (basket: Basket, catalogue: Catalogue): number => {
-    return Array.from(basket.entries()).reduce((total, [productName, quantity]) => {
-        const price = catalogue.get(productName);
-        if (price === undefined) {
+    return Object.entries(basket).reduce((total, [productName, quantity]) => {
+
+        if (!Object.hasOwn(catalogue, productName)) {
             throw new UnknownProductError(productName);
         }
-        return total + price * quantity;
+
+        const unitPrice = catalogue[productName]!;
+
+        return total + unitPrice * quantity;
     }, 0);
 }

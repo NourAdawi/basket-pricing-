@@ -9,9 +9,9 @@ export const pence = (value: number): Pence => {
 
 export type ProductName = string;
 
-export type Basket = ReadonlyMap<ProductName, number>;
+export type Basket = Readonly<Record<ProductName, number>>;
 
-export type Catalogue = ReadonlyMap<ProductName, Pence>;
+export type Catalogue = Readonly<Record<ProductName, Pence>>;
 
 export interface PricingResult {
     readonly subTotal: number; // in pounds

@@ -5,8 +5,8 @@ describe("catalogueFromPounds", () => {
     it("converts pounds to whole pence", () => {
         const catalogue = catalogueFromPounds({ beans: 0.65, milk: 1.30 });
 
-        expect(catalogue.get("beans")).toBe(65);
-        expect(catalogue.get("milk")).toBe(130);
+        expect(catalogue["beans"]).toBe(65);
+        expect(catalogue["milk"]).toBe(130);
     });
 
     it.each([
