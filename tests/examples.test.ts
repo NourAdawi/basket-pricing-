@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { catalogueFromPounds } from "../src/catalogue.js";
-import { cheapestFreeInSet } from "../src/offers/cheapest-free-in-set.js";
-import { multiBuy } from "../src/offers/multi-buy.js";
-import { percentageOff } from "../src/offers/percentage-off.js";
-import { priceBasket } from "../src/pricer.js";
+
+import {
+    catalogueFromPounds,
+    cheapestFreeInSet,
+    multiBuy,
+    percentageOff,
+    priceBasket
+} from "../src/index.js";
 
 // The worked examples from the brief, with its own catalogue and its own published
 // figures. If this file passes, the library does what was asked; everything else is

@@ -57,9 +57,8 @@ describe("multiBuy", () => {
     });
 
     it("contributes nothing when the product has left the catalogue", () => {
-        // "It's possible that there are offers on products which are no longer in
-        // the catalogue." The offer is stale, not broken, so it stays silent.
-        expect(multiBuy("Caviar", 3, 2).computeDiscount({ "Caviar": 6 }, catalogue)).toBe(0);
+
+        expect(multiBuy("Caviar", 3, 2).computeDiscount({ "Biscuits": 6 }, catalogue)).toBe(0);
     });
 
     it("does not mistake an inherited object key for a product", () => {

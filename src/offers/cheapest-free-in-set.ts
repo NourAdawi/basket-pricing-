@@ -27,7 +27,9 @@ export const cheapestFreeInSet = (
 
         computeDiscount(basket: Basket, catalogue: Catalogue) {
 
-            // Flatten the eligible products into one price per item
+            // Flatten the eligible products into one price per item. 
+            // Filter out any products that are not in the basket or catalogue
+
             const prices = products
                 .filter(name => Object.hasOwn(basket, name) && Object.hasOwn(catalogue, name))
                 .flatMap(name => Array.from({ length: basket[name]! }, () => catalogue[name]!))

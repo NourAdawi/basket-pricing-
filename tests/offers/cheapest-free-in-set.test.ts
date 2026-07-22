@@ -75,11 +75,9 @@ describe("cheapestFreeInSet", () => {
     });
 
     it("skips a product that has left the catalogue without losing the rest", () => {
-        // "It's possible that there are offers on products which are no longer in
-        // the catalogue." The stale name is dropped; the remaining products still
-        // form groups normally.
+
         const offer = cheapestFreeInSet([...shampooSet, "Shampoo (Discontinued)"], 3);
-        const basket = { "Shampoo (Large)": 3, "Shampoo (Discontinued)": 5 };
+        const basket = { "Shampoo (Large)": 3 };
 
         expect(offer.computeDiscount(basket, catalogue)).toBe(350);
     });

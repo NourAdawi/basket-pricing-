@@ -20,9 +20,9 @@ export const percentageOff = (product: ProductName, percent: number): Offer => {
         description: `${percent}% off ${product}`,
 
         computeDiscount(basket: Basket, catalogue: Catalogue) {
-            // Neither miss is an error. The catalogue miss is required behaviour:
-            // "It's possible that there are offers on products which are no longer
-            // in the catalogue" - such an offer simply contributes nothing.
+            // Two guards, and neither miss is an error:
+            // basket includes the product, and catalogue still sells it, so there is a price to discount.
+
             if (!Object.hasOwn(basket, product) || !Object.hasOwn(catalogue, product)) {
                 return pence(0);
             }

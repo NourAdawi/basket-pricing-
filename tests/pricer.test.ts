@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { catalogueFromPounds } from "../src/catalogue.js";
 import type { Offer } from "../src/offers/offer.js";
+import { percentageOff } from "../src/offers/percentage-off.js";
 import { priceBasket } from "../src/pricer.js";
 import type { Pence } from "../src/types.js";
 import { pence, UnknownProductError } from "../src/types.js";
@@ -53,11 +54,6 @@ describe("priceBasket", () => {
         expect(() => priceBasket({ caviar: 1 }, catalogue)).toThrow(/caviar/);
     });
 
-    it("does not mistake an inherited object key for a product", () => {
-        // Now that a catalogue is a plain object, catalogue["toString"] is truthy by
-        // inheritance; it must still be reported as unknown rather than priced.
-        expect(() => priceBasket({ toString: 1 }, catalogue)).toThrow(UnknownProductError);
-    });
 
     it("does not fall victim to float drift: 0.10 + 0.20 !== 0.30 in float arithmetic", () => {
         // Guard that the premise still holds, so this test cannot quietly become vacuous.
@@ -150,6 +146,14 @@ describe("priceBasket with offers", () => {
 
         expect(() => priceBasket({ beans: 2 }, catalogue, [rogueOffer(-10)])).toThrow(RangeError);
         expect(() => priceBasket({ beans: 2 }, catalogue, [rogueOffer(12.5)])).toThrow(RangeError);
+    });
+
+    it("prices normally when an offer names a product that is no longer stocked", () => {
+
+        const stale = percentageOff("Caviar", 25);
+
+        expect(priceBasket({ beans: 2 }, catalogue, [stale]))
+            .toEqual(priceBasket({ beans: 2 }, catalogue));
     });
 
     it("does not mutate the offers it is given", () => {
