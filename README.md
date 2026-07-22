@@ -42,7 +42,7 @@ priceBasket(basket, catalogue, [percentageOff("Sardines", 25)]);
 Implementations:
 
 - `percentageOff(product, percent)` Percent is on the 0 to 100 scale
-- `multiBuy(product, buyQty, payQty)` covers "buy 2 get 1 free" as buy 3 pay 2, and scales to 6 for 4, 9 for 6 automatically
+- `multiBuy(product, buyQty, payQty)` covers "buy 2 get 1 free" as buy 3 pay 2, and scales to 6 for 4, 9 for 6 automatically.
 - `cheapestFreeInSet(products, groupSize)` covers "buy three, cheapest free" across a set of products, maximising the discount for the customer
 
 

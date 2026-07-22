@@ -24,3 +24,5 @@ export new factory from src/index.ts
 7- write the percentageOff factory funtion, validate the discount first; misconfiguration fails at construction. the computeDiscpunt method returns 0 discount in two cases:
 offered product is not the basket + product is no longer in the catalouge. Rounding is happing on the total, not on each unit. 
 create a new test suite for the percentageOff factory.
+
+8- Following percentageOff offer and tests example, write a test suite for mulit-buy offer 
