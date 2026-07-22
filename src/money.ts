@@ -1,12 +1,19 @@
 import { pence } from "./types.js";
 
 // Prices are held as whole pence internally; pounds are only for presenting results.
-
 export const penceToPounds = (value: number): number => {
     if (!Number.isInteger(value) || value < 0) {
         throw new RangeError(`Pence must be a positive integer, got ${value}`);
     }
     return value / 100;
+};
+
+// Math.round already does Half-up rounding for non-negatives; named so the policy is explicit and swappable
+export const roundHalfUp = (value: number): number => {
+    if (!Number.isFinite(value) || value < 0) {
+        throw new RangeError(`Cannot round a negative or non-finite amount, got ${value}`);
+    }
+    return Math.round(value);
 };
 
 // Inverse of penceToPounds, for reading pounds off a price list into the catalogue.

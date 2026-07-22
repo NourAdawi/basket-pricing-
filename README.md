@@ -33,16 +33,24 @@ interface Offer {
 
 Each offer receives the whole basket and catalogue and returns the discount it contributes, in pence. Offers that do not apply return 0. This design means new offer types (for example "spend over X, get Y off") can be added by other teams without changing the pricer itself.
 
-Planned implementations:
+Offers are factory functions:
 
-- `PercentageOff(product, percent)`
-- `MultiBuy(product, buyQty, payQty)` covers "buy 2 get 1 free" as buy 3 pay 2, and scales to 6 for 4, 9 for 6 automatically
-- `CheapestFreeInSet(products, groupSize)` covers "buy three, cheapest free" across a set of products, maximising the discount for the customer
+```ts
+priceBasket(basket, catalogue, [percentageOff("Sardines", 25)]);
+```
+
+Implementations:
+
+- `percentageOff(product, percent)` Percent is on the 0 to 100 scale
+- `multiBuy(product, buyQty, payQty)` covers "buy 2 get 1 free" as buy 3 pay 2, and scales to 6 for 4, 9 for 6 automatically
+- `cheapestFreeInSet(products, groupSize)` covers "buy three, cheapest free" across a set of products, maximising the discount for the customer
 
 
 ### Money
 
 All internal arithmetic is done in integer pence to avoid floating point drift. Conversion to pounds happens only at the public boundary. Rounding is half-up, applied where an offer produces fractional pence.
+
+Rounding is applied to the **line total, not to each unit**. 25% off two tins of sardines at £1.89 is `roundHalfUp(94.5)` = 95p; rounding each unit first would give 47p × 2 = 94p and cost the customer a penny.
 
 ### Assumptions and edge-case - will revisist 
 

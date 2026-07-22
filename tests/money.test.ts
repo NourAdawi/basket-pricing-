@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { penceToPounds, poundsToPence } from "../src/money.js";
+import { penceToPounds, poundsToPence, roundHalfUp } from "../src/money.js";
 
 describe("penceToPounds", () => {
     it.each([
@@ -48,6 +48,39 @@ describe("poundsToPence", () => {
         ["infinite", Infinity]
     ])("rejects a %s price", (_label, value) => {
         expect(() => poundsToPence(value)).toThrow(RangeError);
+    });
+});
+
+describe("roundHalfUp", () => {
+    it.each([
+        [94.5, 95],
+        [47.25, 47],
+        [0.5, 1],
+        [23.625, 24],
+        [1.5, 2],
+        [2.5, 3]
+    ])("rounds %d to %i", (input, expected) => {
+        expect(roundHalfUp(input)).toBe(expected);
+    });
+
+    // 2.5 -> 3 above is the case that distinguishes half-up from banker's rounding,
+    // which would give 2. Pinning it means a change of policy cannot pass silently.
+    it("rounds a half away from zero, not to even", () => {
+        expect(roundHalfUp(2.5)).toBe(3);
+        expect(roundHalfUp(4.5)).toBe(5);
+    });
+
+    it("leaves whole amounts alone", () => {
+        expect(roundHalfUp(0)).toBe(0);
+        expect(roundHalfUp(189)).toBe(189);
+    });
+
+    it.each([
+        ["negative", -0.5],
+        ["not a number", NaN],
+        ["infinite", Infinity]
+    ])("rejects a %s amount", (_label, value) => {
+        expect(() => roundHalfUp(value)).toThrow(RangeError);
     });
 });
 
