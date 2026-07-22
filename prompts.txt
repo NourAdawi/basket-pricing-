@@ -35,3 +35,6 @@ create a new test suite for the percentageOff factory.
 
 10- Write end-to-end test suite while the library is driven through its public entry point, it should demonstrate how a web shop or a till would use it.
    test cases are: a basket with every kind of offer + several offers on the same product + basket should never results in negative price + cases that's caused because catalouge and offers are maintained by different teams; discountiued product and items with no offers
+
+11- Format the basket and the output of the priceBasket in a receipt style
+ 

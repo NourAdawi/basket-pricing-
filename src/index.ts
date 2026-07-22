@@ -9,3 +9,6 @@ export { UnknownProductError } from "./types.js";
 export type { Basket, Catalogue, PricingResult, ProductName, Pence } from "./types.js";
 
 export type { Offer } from "./offers/offer.js";
+
+export { pence } from "./types.js";
+export { roundHalfUp } from "./money.js";
