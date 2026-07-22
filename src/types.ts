@@ -1,4 +1,4 @@
-type Pence = number & { readonly __brand: "Pence" };
+export type Pence = number & { readonly __brand: "Pence" };
 
 export const pence = (value: number): Pence => {
     if (!Number.isInteger(value) || value < 0) {
