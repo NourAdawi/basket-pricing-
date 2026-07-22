@@ -26,3 +26,9 @@ offered product is not the basket + product is no longer in the catalouge. Round
 create a new test suite for the percentageOff factory.
 
 8- Following percentageOff offer and tests example, write a test suite for mulit-buy offer 
+
+9- Inside cheapestFreeInSet factory, write the computeDiscount logic as following:
+   1- Flatten the basket into indiviual prices
+   2- Group the products and see how many items go free
+   3- Make the free ones as expensive as possible in each group, this is done by ordering products descending, most expensive first; the best
+    available first free item is the groupSize-th
