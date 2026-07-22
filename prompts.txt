@@ -16,3 +16,5 @@ after that update the setup block in test to use catalogueFromPounds. and create
 export new factory from src/index.ts
 
 4- create a test suite for money.ts utils that test the conversion + malformed and rejected values + round tripping 
+
+5- Write three tests for these examples in a new acceptence.tests.ts, even though they are failing for now 
